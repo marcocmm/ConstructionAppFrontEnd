@@ -1,12 +1,14 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-// import AuthContext from "../../context/auth/authContext";
+import logo from "../../img/logo.png";
+
+import AuthContext from "../../context/auth/authContext";
 
 const Navbar = ({ title, icon }) => {
-  // const authContext = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
 
-  // const { isAuthenticated, logout, user, loadUser } = authContext;
+  const { logout, user, loadUser } = authContext;
 
   useEffect(() => {
     // loadUser();
@@ -14,50 +16,28 @@ const Navbar = ({ title, icon }) => {
   }, []);
 
   const onLogout = () => {
-    // logout();
+    logout();
   };
 
-  // const authLinks = (
-  //   <Fragment>
-  //     <li>
-  //       <Link to="/cards">Cards</Link>
-  //     </li>
-  //     <li>
-  //       <Link to="/decks">Decks</Link>
-  //     </li>
-  //     <li>
-  //       <Link to="/users">Users</Link>
-  //     </li>
-  //     <li>Hello {user && user.name}</li>
-  //     <li>
-  //       <a onClick={onLogout} href="#!">
-  //         <i className="fas fa-sign-out-alt" />{" "}
-  //         <span className="hide-sm">Logout</span>
-  //       </a>
-  //     </li>
-  //   </Fragment>
-  // );
-
-  const guestLinks = (
-    <Fragment>
-      <li>
-        <Link to="/register">Register</Link>
-      </li>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
-    </Fragment>
-  );
-
   return (
-    <div className="navbar bg-primary">
+    <div className="navbar bg-primary1">
       <h1>
         <Link to="/">
-          <i className={icon} /> {title}
+          <img src={logo} />
         </Link>
       </h1>
-      {/* <ul>{isAuthenticated ? authLinks : guestLinks}</ul> */}
-      <ul>{guestLinks}</ul>
+      <ul>
+        {" "}
+        <Fragment>
+          <li>Hello {user && user.nome}</li>
+          <li>
+            <a onClick={onLogout} href="#!">
+              <i className="fas fa-sign-out-alt" />{" "}
+              <span className="hide-sm">Logout</span>
+            </a>
+          </li>
+        </Fragment>
+      </ul>
     </div>
   );
 };

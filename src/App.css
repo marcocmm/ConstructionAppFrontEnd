@@ -2,7 +2,7 @@
 
 /* Global Styles */
 :root {
-  --primary-color: #003699;
+  --primary-color: #e97d11;
   --dark-color: #333333;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
@@ -40,12 +40,41 @@ img {
   width: 100%;
 }
 
+.bgLogin {
+  background-image: url("./img/loginbg.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.flex-login {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: stretch;
+  align-content: flex-end;
+}
+.login-botton {
+  background-image: url("./img/loginbotton.png");
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* background-size: cover; */
+  /* background-color: #fff; */
+  height: 15%;
+
+  /* background-image: url("./img/loginbg.jpg"); */
+  /* border: "2px solid #5B97F4"; */
+}
 /* Utilities */
 .container {
   max-width: 1100px;
-  margin: auto;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
   overflow: hidden;
-  padding: 0 2rem;
+  /* padding: 0 2rem; */
 }
 
 /* Text Styles*/
@@ -229,6 +258,11 @@ img {
   opacity: 0.9;
   background: var(--light-color);
   color: #333;
+}
+
+.bg-primary1 {
+  background: var(--primary-color);
+  color: #fff;
 }
 
 .btn-primary,

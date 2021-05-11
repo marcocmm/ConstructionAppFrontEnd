@@ -1,7 +1,13 @@
 import React from "react";
+import Navbar from "../layout/Navbar";
 
 const Home = () => {
-  return <div className="grid-2">Home!</div>;
+  return (
+    <div>
+      <Navbar />
+      Home!
+    </div>
+  );
 };
 
 export default Home;

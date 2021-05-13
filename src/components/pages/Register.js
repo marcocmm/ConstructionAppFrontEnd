@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "../layout/Navbar";
 import { useFormFields } from "../../libs/hooksLib";
 import { Form, Button } from "react-bootstrap";
+import AlertContext from "../../context/alert/alertContext";
+import AuthContext from "../../context/auth/authContext";
 
-const Home = () => {
+const Register = ({ props }) => {
+  const alertContext = useContext(AlertContext);
+  const authContext = useContext(AuthContext);
+
+  const { register } = authContext;
+
+  const { setAlert } = alertContext;
+
   const [fields, handleFieldChange] = useFormFields({
     nome: "",
     email: "",
@@ -13,20 +22,31 @@ const Home = () => {
     password2: "",
   });
 
-  function validateFields() {}
+  function validateFields() {
+    if (fields.password !== fields.password2)
+      setAlert("Senhas não são iguais!", "danger");
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
-
+    validateFields();
     // setIsLoading(true);
 
     try {
-      // await Auth.signIn(fields.email, fields.password);
-      // userHasAuthenticated(true);
-      // history.push("/");
-      console.log(fields);
+      if (register(fields)) {
+        handleFieldChange({
+          nome: "",
+          email: "",
+          nif: "",
+          cargo: "Gestor",
+          password: "",
+          password2: "",
+        });
+        setAlert("Usuário registrado!", "success");
+      }
     } catch (e) {
       console.log(e);
+      setAlert("Erro ao registrar!", "danger");
       // setIsLoading(false);
     }
   }
@@ -164,4 +184,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Register;

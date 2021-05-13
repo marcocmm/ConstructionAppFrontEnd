@@ -5,6 +5,7 @@ import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import NotFound from "./components/pages/NotFound";
 import AuthState from "./context/auth/AuthState";
+import AlertState from "./context/alert/AlertState";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -12,16 +13,18 @@ import "./App.css";
 function App() {
   return (
     <AuthState>
-      <Router>
-        <Fragment>
-          <Switch>
-            <PrivateRoute exact path="/" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route component={NotFound} />
-          </Switch>
-        </Fragment>
-      </Router>
+      <AlertState>
+        <Router>
+          <Fragment>
+            <Switch>
+              <PrivateRoute exact path="/" component={Home} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
+              <Route component={NotFound} />
+            </Switch>
+          </Fragment>
+        </Router>
+      </AlertState>
     </AuthState>
   );
 }

@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
+import Alerts from "./Alerts";
 
 import AuthContext from "../../context/auth/authContext";
 
@@ -60,6 +61,7 @@ const Navbar = ({ type }) => {
       <div className="navbarLinks" style={{ backgroundColor: "#f6f6f6" }}>
         {navbarLinksContent()}
       </div>
+      <Alerts />
     </div>
   );
 };

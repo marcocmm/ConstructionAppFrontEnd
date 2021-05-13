@@ -66,6 +66,7 @@ const Home = () => {
                   placeholder="Nome"
                   value={fields.nome}
                   onChange={handleFieldChange}
+                  required
                 />
               </Form.Group>
 
@@ -76,6 +77,7 @@ const Home = () => {
                   placeholder="Email"
                   value={fields.email}
                   onChange={handleFieldChange}
+                  required
                 />
               </Form.Group>
               <Form.Group size="lg" controlId="nif">
@@ -85,6 +87,7 @@ const Home = () => {
                   placeholder="NIF/NIPC"
                   value={fields.nif}
                   onChange={handleFieldChange}
+                  required
                 />
               </Form.Group>
             </Form.Group>
@@ -120,6 +123,7 @@ const Home = () => {
                   placeholder="Senha"
                   value={fields.password}
                   onChange={handleFieldChange}
+                  minLength={6}
                 />
               </Form.Group>
               <Form.Group size="lg" controlId="password2">
@@ -129,6 +133,7 @@ const Home = () => {
                   placeholder="Confirmar senha"
                   value={fields.password2}
                   onChange={handleFieldChange}
+                  minLength={6}
                 />
               </Form.Group>
             </Form.Group>

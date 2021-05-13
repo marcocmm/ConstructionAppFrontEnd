@@ -40,6 +40,7 @@ export default (state, action) => {
       };
     case AUTH_ERROR:
       console.log("auth error");
+      break;
     case LOGIN_FAIL:
       return {
         ...state,

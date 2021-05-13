@@ -99,6 +99,10 @@ img {
   text-align: center;
 }
 
+.text-color-primary {
+  color: var(--primary-color);
+}
+
 .text-primary {
   color: var(--primary-color);
 }
@@ -397,7 +401,15 @@ table th {
   width: 100%;
   border-bottom: solid 1px var(--primary-color);
   opacity: 0.9;
-  margin-bottom: 1rem;
+}
+.navbarLinks {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  padding: 1rem 2rem;
+  z-index: 1;
+  width: 100%;
+  border-bottom: solid 1px #f6f6f6;
 }
 
 .navbar ul {

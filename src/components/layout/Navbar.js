@@ -1,14 +1,13 @@
 import React, { Fragment, useContext, useEffect } from "react";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
 
 import AuthContext from "../../context/auth/authContext";
 
-const Navbar = ({ title, icon }) => {
+const Navbar = ({ type }) => {
   const authContext = useContext(AuthContext);
 
-  const { logout, user, loadUser } = authContext;
+  const { logout, user } = authContext; //loadUser
 
   useEffect(() => {
     // loadUser();
@@ -19,37 +18,50 @@ const Navbar = ({ title, icon }) => {
     logout();
   };
 
-  return (
-    <div className="navbar bg-primary1">
-      <h1>
-        <Link to="/">
-          <img src={logo} />
-        </Link>
-      </h1>
-      <ul>
-        {" "}
+  const navbarContent = () => {
+    if (type === "home")
+      return (
+        <ul>
+          {" "}
+          <Fragment>
+            <li>Hello {user && user.nome}</li>
+            <li>
+              <a onClick={onLogout} href="#!">
+                <i className="fas fa-sign-out-alt" />{" "}
+                <span className="hide-sm">Logout</span>
+              </a>
+            </li>
+          </Fragment>
+        </ul>
+      );
+  };
+  const navbarLinksContent = () => {
+    if (type === "register") return <ul>Cadastro de usuário</ul>;
+    else if (type === "home")
+      return (
         <Fragment>
-          <li>Hello {user && user.nome}</li>
-          <li>
-            <a onClick={onLogout} href="#!">
-              <i className="fas fa-sign-out-alt" />{" "}
-              <span className="hide-sm">Logout</span>
-            </a>
-          </li>
+          <ul>Obras em andamento</ul>
+          <ul>Relatórios</ul>
+          <ul>Fornecedores</ul>
         </Fragment>
-      </ul>
+      );
+  };
+
+  return (
+    <div>
+      <div className="navbar bg-primary1">
+        <h1>
+          <Link to="/">
+            <img src={logo} alt="Logo" />
+          </Link>
+        </h1>
+        {navbarContent()}
+      </div>
+      <div className="navbarLinks" style={{ backgroundColor: "#f6f6f6" }}>
+        {navbarLinksContent()}
+      </div>
     </div>
   );
-};
-
-Navbar.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string,
-};
-
-Navbar.defaultProps = {
-  title: "Cards Manager",
-  icon: "fas fa-cube",
 };
 
 export default Navbar;

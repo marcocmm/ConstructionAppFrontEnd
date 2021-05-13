@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Login from "./components/pages/Login";
+import Register from "./components/pages/Register";
 import NotFound from "./components/pages/NotFound";
 import AuthState from "./context/auth/AuthState";
 import PrivateRoute from "./components/routing/PrivateRoute";
@@ -16,6 +17,7 @@ function App() {
           <Switch>
             <PrivateRoute exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
             <Route component={NotFound} />
           </Switch>
         </Fragment>

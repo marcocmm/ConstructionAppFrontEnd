@@ -5,7 +5,7 @@ import { Form, Button } from "react-bootstrap";
 import AlertContext from "../../context/alert/alertContext";
 import AuthContext from "../../context/auth/authContext";
 
-const Register = ({ props }) => {
+const Register = (props) => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
@@ -15,15 +15,16 @@ const Register = ({ props }) => {
 
   const [fields, handleFieldChange] = useFormFields({
     nome: "",
-    email: "",
+    telefone: "",
     nif: "",
     cargo: "Gestor",
-    password: "",
-    password2: "",
+    senha: "",
+    senha2: "",
+    tipo_usuario_id: "1",
   });
 
   function validateFields() {
-    if (fields.password !== fields.password2)
+    if (fields.senha !== fields.senha2)
       setAlert("Senhas não são iguais!", "danger");
   }
 
@@ -31,29 +32,21 @@ const Register = ({ props }) => {
     event.preventDefault();
     validateFields();
     // setIsLoading(true);
-
     try {
       if (register(fields)) {
-        handleFieldChange({
-          nome: "",
-          email: "",
-          nif: "",
-          cargo: "Gestor",
-          password: "",
-          password2: "",
-        });
         setAlert("Usuário registrado!", "success");
+        props.history.push("/");
       }
     } catch (e) {
       console.log(e);
-      setAlert("Erro ao registrar!", "danger");
+      setAlert("Erro ao registrar!!", "danger");
       // setIsLoading(false);
     }
   }
 
   return (
     <div>
-      <Navbar type="register" />
+      <Navbar type="registrar" />
       <div
         style={{
           padding: "2.5rem",
@@ -77,7 +70,7 @@ const Register = ({ props }) => {
           >
             <Form.Group
               controlId="formName"
-              style={{ width: "400px", margin: "20px" }}
+              style={{ width: "350px", margin: "20px" }}
             >
               <Form.Group size="lg" controlId="nome">
                 <Form.Label>Nome</Form.Label>
@@ -90,12 +83,12 @@ const Register = ({ props }) => {
                 />
               </Form.Group>
 
-              <Form.Group size="lg" controlId="email">
-                <Form.Label>Email</Form.Label>
+              <Form.Group size="lg" controlId="telefone">
+                <Form.Label>Telefone</Form.Label>
                 <Form.Control
-                  type="email"
-                  placeholder="Email"
-                  value={fields.email}
+                  type="text"
+                  placeholder="Telefone"
+                  value={fields.telefone}
                   onChange={handleFieldChange}
                   required
                 />
@@ -114,7 +107,7 @@ const Register = ({ props }) => {
 
             <Form.Group
               controlId="cargoForm"
-              style={{ width: "400px", margin: "20px" }}
+              style={{ width: "350px", margin: "20px" }}
             >
               <Form.Group controlId="cargo" size="lg">
                 <Form.Label>Selecionar o cargo</Form.Label>
@@ -134,24 +127,24 @@ const Register = ({ props }) => {
 
             <Form.Group
               controlId="formPassword"
-              style={{ width: "400px", margin: "20px" }}
+              style={{ width: "350px", margin: "20px" }}
             >
-              <Form.Group size="lg" controlId="password">
+              <Form.Group size="lg" controlId="senha">
                 <Form.Label>Senha</Form.Label>
                 <Form.Control
                   type="password"
                   placeholder="Senha"
-                  value={fields.password}
+                  value={fields.senha}
                   onChange={handleFieldChange}
                   minLength={6}
                 />
               </Form.Group>
-              <Form.Group size="lg" controlId="password2">
+              <Form.Group size="lg" controlId="senha2">
                 <Form.Label>Confirmar senha</Form.Label>
                 <Form.Control
                   type="password"
                   placeholder="Confirmar senha"
-                  value={fields.password2}
+                  value={fields.senha2}
                   onChange={handleFieldChange}
                   minLength={6}
                 />

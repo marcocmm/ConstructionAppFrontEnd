@@ -42,7 +42,7 @@ const Login = (props) => {
   return (
     <div className="bgLogin">
       <Container>
-        <div className="grid-2" style={{ marginTop: "200px" }}>
+        <div className="grid-2" style={{ marginTop: "100px" }}>
           <div className="bg-light" style={{ padding: "50px" }}>
             <h2 className="text-color-primary text-left">Login</h2>
             <Form onSubmit={onSubmit}>

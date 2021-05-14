@@ -51,19 +51,20 @@ const AuthState = (props) => {
 
     try {
       const res = await axios.post("/user/user", formData, config);
+      console.log(res.data);
+      // dispatch({
+      //   type: REGISTER_SUCCESS,
+      //   payload: "Cadastrado com sucesso",
+      // });
 
-      dispatch({
-        type: REGISTER_SUCCESS,
-        payload: res.data,
-      });
-
-      loadUser();
+      // login({ senha: formData.senha, nif: formData.nif });
       return true;
     } catch (err) {
-      dispatch({
-        type: REGISTER_FAIL,
-        payload: err.response.data.msg,
-      });
+      console.log(err);
+      // dispatch({
+      //   type: REGISTER_FAIL,
+      //   payload: err.response.data.msg,
+      // });
       return false;
     }
   };

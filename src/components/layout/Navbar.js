@@ -20,7 +20,7 @@ const Navbar = ({ type }) => {
   };
 
   const navbarContent = () => {
-    if (type === "home")
+    if (type !== "registrar")
       return (
         <ul>
           {" "}
@@ -36,6 +36,7 @@ const Navbar = ({ type }) => {
         </ul>
       );
   };
+
   const navbarLinksContent = () => {
     if (type === "register") return <ul>Cadastro de usuário</ul>;
     else if (type === "home")
@@ -46,6 +47,7 @@ const Navbar = ({ type }) => {
           <ul>Fornecedores</ul>
         </Fragment>
       );
+    else if (type === "novaobra") return <ul>Cadastro de obra</ul>;
   };
 
   return (

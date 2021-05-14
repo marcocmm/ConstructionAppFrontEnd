@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
+import NovaObra from "./components/pages/NovaObra";
 import NotFound from "./components/pages/NotFound";
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
@@ -18,6 +19,7 @@ function App() {
           <Fragment>
             <Switch>
               <PrivateRoute exact path="/" component={Home} />
+              <PrivateRoute exact path="/novaobra" component={NovaObra} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route component={NotFound} />

@@ -29,7 +29,7 @@ const CardObra = ({ name, urlImage }) => {
     <Link to="/novaobra">
       <div
         style={{
-          width: "350px",
+          width: "90%",
           height: "365px",
           backgroundColor: "#F6F6F6",
           margin: "20px",

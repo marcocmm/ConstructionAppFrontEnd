@@ -41,55 +41,61 @@ const Login = (props) => {
 
   return (
     <div className="bgLogin">
-      <Container>
-        <div className="grid-2" style={{ marginTop: "100px" }}>
-          <div className="bg-light" style={{ padding: "50px" }}>
-            <h2 className="text-color-primary text-left">Login</h2>
-            <Form onSubmit={onSubmit}>
-              <div className="form-group">
-                <label htmlFor="text">NIF</label>
-                <input
-                  id="nif"
-                  type="text"
-                  name="nif"
-                  value={nif}
-                  onChange={onChange}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password">Senha</label>
-                <input
-                  id="senha"
-                  type="password"
-                  name="senha"
-                  value={senha}
-                  onChange={onChange}
-                />
-
-                <p className="text-right text-color-primary">Esqueci a senha</p>
-              </div>
-              <div className="grid-2">
-                <Link to="/register">
+      <div style={{ height: "20%" }}></div>
+      <div style={{ height: "60%" }}>
+        <Container>
+          <div className="grid-2" style={{}}>
+            <div className="bg-light" style={{ padding: "50px" }}>
+              <h2 className="text-color-primary text-left">Login</h2>
+              <Form onSubmit={onSubmit}>
+                <div className="form-group">
+                  <label htmlFor="text">NIF</label>
                   <input
-                    type=""
-                    value="Criar conta"
-                    className="btn btn-light btn-block"
+                    id="nif"
+                    type="text"
+                    name="nif"
+                    value={nif}
+                    onChange={onChange}
                   />
-                </Link>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password">Senha</label>
+                  <input
+                    id="senha"
+                    type="password"
+                    name="senha"
+                    value={senha}
+                    onChange={onChange}
+                  />
 
-                <input
-                  type="submit"
-                  value="Logar"
-                  className="btn btn-primary btn-block"
-                />
-              </div>
-            </Form>
+                  <p className="text-right text-color-primary">
+                    Esqueci a senha
+                  </p>
+                </div>
+                <div className="grid-2">
+                  <Link to="/register">
+                    <input
+                      type=""
+                      value="Criar conta"
+                      className="btn btn-light btn-block"
+                    />
+                  </Link>
+
+                  <input
+                    type="submit"
+                    value="Logar"
+                    className="btn btn-primary btn-block"
+                  />
+                </div>
+              </Form>
+            </div>
+            <div style={{ marginTop: "150px" }}>
+              <img src={logo} alt="Logo" />
+            </div>
           </div>
-          <div style={{ marginTop: "150px" }}>
-            <img src={logo} alt="Logo" />
-          </div>
-        </div>
-      </Container>
+        </Container>
+      </div>
+      <div style={{ height: "20%" }}>oi</div>
     </div>
   );
 };

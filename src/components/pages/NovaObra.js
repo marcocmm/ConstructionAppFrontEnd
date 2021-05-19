@@ -31,6 +31,7 @@ const NovaObra = () => {
           <Form.Group
             style={{
               padding: "2.5rem",
+              marginTop: "-40px",
               display: "flex",
               flexDirection: "row",
               flexWrap: "wrap",

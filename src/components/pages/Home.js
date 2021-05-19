@@ -29,6 +29,7 @@ const Home = () => {
           }
         />
         <CardObra />
+        <CardObra />
       </div>
     </div>
   );

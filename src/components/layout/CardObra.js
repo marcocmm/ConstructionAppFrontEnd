@@ -2,7 +2,7 @@ import React from "react";
 import imgNovaObra from "../../img/novaObra.png";
 import { Link } from "react-router-dom";
 
-const CardObra = ({ name, urlImage }) => {
+const CardObra = ({ name, urlImage, id }) => {
   const novaObra = (
     <Link to="/novaobra">
       <div
@@ -26,7 +26,7 @@ const CardObra = ({ name, urlImage }) => {
   );
 
   const obra = (
-    <Link to="/novaobra">
+    <Link to={"/obra/" + id}>
       <div
         style={{
           width: "90%",

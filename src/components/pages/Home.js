@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../layout/Navbar";
 import CardObra from "../layout/CardObra";
 import axios from "axios";
-// import { Link } from "react-router-dom";
 
 const Home = () => {
   const [allObras, setAllObras] = useState([]);
@@ -35,7 +34,13 @@ const Home = () => {
         }}
       >
         {allObras.map((obra) => {
-          return <CardObra name={obra.nome} urlImage={obra.imageURL} />;
+          return (
+            <CardObra
+              name={obra.nome}
+              urlImage={obra.imageURL}
+              id={obra._id.$oid}
+            />
+          );
         })}
 
         <CardObra />

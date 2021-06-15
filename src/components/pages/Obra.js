@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../layout/Navbar";
 // import { useFormFields } from "../../libs/hooksLib";
 // import { Form, Button } from "react-bootstrap";
 
 // import { Link } from "react-router-dom";
 
-const Obra = () => {
+const Obra = ({ match }) => {
+  useEffect(() => {
+    // getObra(match.params.id);
+  }, []);
+
   const urlImage = "https://www.plantapronta.com.br/projetos/1011/01.jpg";
   return (
     <div>

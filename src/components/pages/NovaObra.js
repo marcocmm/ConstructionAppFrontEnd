@@ -4,9 +4,7 @@ import { useFormFields } from "../../libs/hooksLib";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 
-// import { Link } from "react-router-dom";
-
-const NovaObra = () => {
+const NovaObra = (props) => {
   const [fields, handleFieldChange] = useFormFields({
     nome: "",
     dataInicio: "",
@@ -33,9 +31,11 @@ const NovaObra = () => {
 
       // if (register(fields)) {
       // setAlert("Usuário registrado!", "success");
-      // props.history.push("/");
       // }
-      console.log(res);
+      if (res.status === 201) {
+        let id = res.data.result._id.$oid;
+        props.history.push("/obra/" + id);
+      }
     } catch (e) {
       console.log(e);
       // setAlert("Erro ao registrar!!", "danger");

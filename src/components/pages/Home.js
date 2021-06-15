@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../layout/Navbar";
 import CardObra from "../layout/CardObra";
+import axios from "axios";
 // import { Link } from "react-router-dom";
 
 const Home = () => {
+  const [allObras, setAllObras] = useState([]);
+  useEffect(() => {
+    getAllObras();
+  }, []);
+
+  async function getAllObras() {
+    try {
+      const res = await axios.get("/construction/all");
+      if (res.status === 200) setAllObras(res.data);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div>
       <Navbar type="home" />
@@ -18,17 +34,10 @@ const Home = () => {
           height: "100%",
         }}
       >
-        <CardObra
-          name={"Casa - Mario Silva"}
-          urlImage={"https://www.plantapronta.com.br/projetos/1011/01.jpg"}
-        />
-        <CardObra
-          name={"Casa - Manuel"}
-          urlImage={
-            "https://plantasdecasas.com/wp-content/uploads/2018/09/projetos-de-casas-rio-verde-min.jpg"
-          }
-        />
-        <CardObra />
+        {allObras.map((obra) => {
+          return <CardObra name={obra.nome} urlImage={obra.imageURL} />;
+        })}
+
         <CardObra />
       </div>
     </div>

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "../layout/Navbar";
 import { useFormFields } from "../../libs/hooksLib";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
 
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const NovaObra = () => {
   const [fields, handleFieldChange] = useFormFields({
@@ -12,7 +13,36 @@ const NovaObra = () => {
     imageURL: "",
   });
 
-  function handleSubmit(event) {}
+  async function handleSubmit(event) {
+    event.preventDefault();
+    // validateFields();
+    // setIsLoading(true);
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.post(
+        "/construction/construction",
+        fields,
+        config
+      );
+
+      // if (register(fields)) {
+      // setAlert("Usuário registrado!", "success");
+      // props.history.push("/");
+      // }
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+      // setAlert("Erro ao registrar!!", "danger");
+      // setIsLoading(false);
+    }
+  }
+
   return (
     <div>
       <Navbar type="novaobra" />
@@ -83,9 +113,6 @@ const NovaObra = () => {
               width: "400px",
               margin: "20px",
               display: "flex",
-              // flexDirection: "row",
-              // flexWrap: "wrap",
-              // alignItems: "flex-start",
               alignContent: "right",
             }}
           >

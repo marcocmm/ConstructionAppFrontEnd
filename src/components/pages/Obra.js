@@ -1,17 +1,11 @@
 import React from "react";
 import Navbar from "../layout/Navbar";
-import { useFormFields } from "../../libs/hooksLib";
-import { Form, Button } from "react-bootstrap";
+// import { useFormFields } from "../../libs/hooksLib";
+// import { Form, Button } from "react-bootstrap";
 
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const Obra = () => {
-  const [fields, handleFieldChange] = useFormFields({
-    nome: "",
-    dataInicio: "",
-    imageURL: "",
-  });
-
   const urlImage = "https://www.plantapronta.com.br/projetos/1011/01.jpg";
   return (
     <div>

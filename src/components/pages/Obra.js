@@ -5,10 +5,7 @@ import axios from "axios";
 import graph1 from "../../img/graph1.png";
 import graph2 from "../../img/graph2.png";
 
-// import { useFormFields } from "../../libs/hooksLib";
-// import { Form, Button } from "react-bootstrap";
-
-// import { Link } from "react-router-dom";
+// import { Button } from "react-bootstrap";
 
 const Obra = ({ match }) => {
   const [obra, setObra] = useState();
@@ -16,7 +13,26 @@ const Obra = ({ match }) => {
   useEffect(() => {
     getObra(match.params.id);
   }, []);
+  //por em outro arquivo
+  async function getClientes(setData) {
+    try {
+      const res = await axios.get("/customer/all");
+      if (res.status === 200) setData(res.data);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
+  async function getFornecedores(setData) {
+    try {
+      const res = await axios.get("/provider/all");
+      if (res.status === 200) setData(res.data);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   async function getObra(id) {
     try {
       const res = await axios.get("/construction?construction_id=" + id);
@@ -64,15 +80,21 @@ const Obra = ({ match }) => {
           </div>
 
           <div
-            style={{ height: "47vh", display: "flex", flexDirection: "row" }}
+            style={{
+              height: "47vh",
+              display: "flex",
+              flexDirection: "row",
+              overflowX: "scroll",
+            }}
           >
-            <ItemObra type={"colaborador"} />
-            <ItemObra type={"consumivel"} />
-            <ItemObra type={"equipamento"} />
-            <ItemObra type={"cliente"} />
-            <ItemObra type={"material"} />
-            <ItemObra type={"servicos"} />
-            <ItemObra type={"presenca"} />
+            <ItemObra getData={getClientes} type={"colaborador"} />
+            <ItemObra getData={getClientes} type={"consumivel"} />
+            <ItemObra getData={getClientes} type={"equipamento"} />
+            <ItemObra getData={getClientes} type={"cliente"} />
+            <ItemObra getData={getClientes} type={"material"} />
+            <ItemObra getData={getClientes} type={"servico"} />
+            <ItemObra getData={getClientes} type={"presenca"} />
+            <ItemObra getData={getFornecedores} type={"fornecedor"} />
           </div>
         </div>
       )}

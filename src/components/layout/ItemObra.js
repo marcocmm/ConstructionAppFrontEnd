@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import CustomerModal from "../modal/CustomerModal";
 import { typeToTitle } from "../../utils/types";
 
-const ItemObra = ({ type }) => {
+const ItemObra = ({ type, getData }) => {
   const [show, setShow] = useState(false);
+  const [data, setData] = useState([]);
+  const [modalType, setModalType] = useState("novo");
+  const [selectedItem, setSelectedItem] = useState({});
+
+  useEffect(() => {
+    getData(setData);
+  }, []);
 
   return (
     <div
@@ -19,59 +26,77 @@ const ItemObra = ({ type }) => {
         boxShadow: "1px 1px 2px 1px",
       }}
     >
+      <CustomerModal
+        show={show}
+        setShow={setShow}
+        type={modalType}
+        editFields={selectedItem}
+      />
       <div
         style={{
-          height: "10%",
+          flex: 1,
           width: "200px",
           borderBottom: "1px solid #d1d1d1",
           textAlign: "center",
-          paddingTop: "5px",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         {typeToTitle(type)}
       </div>
       <div
         style={{
-          height: "80%",
+          flex: 10,
           width: "200px",
           display: "flex",
           flexDirection: "column",
+          overflowY: "scroll",
+          cursor: "pointer",
         }}
       >
-        <div
-          style={{
-            height: "10%",
-            width: "200px",
-            borderBottom: "1px solid #d1d1d1",
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
-          <div
-            style={{
-              width: "180px",
-              marginLeft: "10px",
-            }}
-          >
-            {type}
-          </div>
-          <div
-            style={{
-              width: "20px",
-            }}
-          >
-            {">"}
-          </div>
-        </div>
+        {data.map((cliente) => {
+          return (
+            <div
+              onClick={() => {
+                setShow(true);
+                setModalType("editar");
+                setSelectedItem(cliente);
+              }}
+              style={{
+                height: "10%",
+                width: "200px",
+                borderBottom: "1px solid #d1d1d1",
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
+              <div
+                style={{
+                  width: "160px",
+                  marginLeft: "10px",
+                }}
+              >
+                {cliente.nome}
+              </div>
+              <div
+                style={{
+                  width: "20px",
+                }}
+              >
+                {">"}
+              </div>
+            </div>
+          );
+        })}
       </div>
       <div
         style={{
-          height: "10%",
+          flex: 2,
           width: "200px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          marginBottom: "10px",
+          borderTop: "1px solid #d1d1d1",
         }}
       >
         {" "}
@@ -79,13 +104,13 @@ const ItemObra = ({ type }) => {
           variant="primary"
           type="submit"
           onClick={() => {
+            setModalType("novo");
             setShow(true);
           }}
         >
           Novo Item
         </Button>
       </div>
-      <CustomerModal show={show} setShow={setShow} />
     </div>
   );
 };

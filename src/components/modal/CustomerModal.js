@@ -1,15 +1,16 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { useFormFields } from "../../libs/hooksLib";
 import ModalAlerts from "../layout/ModalAlerts";
 import ModalAlertContext from "../../context/modalAlert/modalAlertContext";
 import axios from "axios";
 
-const CustomerModal = ({ show, setShow }) => {
+const CustomerModal = ({ show, setShow, type, editFields }) => {
   const modalAlertContext = useContext(ModalAlertContext);
   const { setAlert } = modalAlertContext;
 
   const handleClose = () => setShow(false);
+  const onDelete = () => setShow(false);
   async function handleSubmit(event) {
     event.preventDefault();
     const config = {
@@ -35,6 +36,11 @@ const CustomerModal = ({ show, setShow }) => {
     nipcnif: "",
   });
 
+  useEffect(() => {
+    if (type === "editar")
+      handleFieldChange({ target: "reset", value: editFields });
+  }, [editFields]);
+
   function clearFields() {
     handleFieldChange({
       target: "reset",
@@ -50,7 +56,9 @@ const CustomerModal = ({ show, setShow }) => {
     <div>
       <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
-          <Modal.Title>Novo Cliente</Modal.Title>
+          <Modal.Title>
+            {type === "novo" ? "Novo Cliente" : "Editar Cliente"}
+          </Modal.Title>
         </Modal.Header>
         <Form onSubmit={handleSubmit}>
           <Modal.Body>
@@ -97,11 +105,21 @@ const CustomerModal = ({ show, setShow }) => {
           </Modal.Body>
           <Modal.Footer>
             <Form.Group controlId="formBasicPassword">
+              {type === "editar" && (
+                <Button
+                  type="button"
+                  className="btn-danger"
+                  variant="secondary"
+                  onClick={onDelete}
+                >
+                  Excluir
+                </Button>
+              )}
               <Button type="reset" variant="secondary" onClick={handleClose}>
                 Cancelar
               </Button>
               <Button type="submit" variant="primary">
-                Adicionar
+                {type === "novo" ? "Adicionar" : "Editar"}
               </Button>
             </Form.Group>
           </Modal.Footer>

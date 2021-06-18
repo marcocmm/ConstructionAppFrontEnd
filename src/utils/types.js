@@ -14,6 +14,8 @@ export function typeToTitle(type) {
       return "Serviços";
     case "presenca":
       return "Presenças";
+    case "fornecedor":
+      return "Fornecerdor";
     default:
       return "Item";
   }

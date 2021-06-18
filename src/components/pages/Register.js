@@ -158,9 +158,6 @@ const Register = (props) => {
               width: "400px",
               margin: "20px",
               display: "flex",
-              // flexDirection: "row",
-              // flexWrap: "wrap",
-              // alignItems: "flex-start",
               alignContent: "right",
             }}
           >

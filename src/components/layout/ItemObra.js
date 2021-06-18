@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
+import CustomerModal from "../modal/CustomerModal";
 import { typeToTitle } from "../../utils/types";
 
 const ItemObra = ({ type }) => {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   return (
     <div
       style={{
@@ -76,25 +75,17 @@ const ItemObra = ({ type }) => {
         }}
       >
         {" "}
-        <Button variant="primary" type="submit" onClick={handleShow}>
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={() => {
+            setShow(true);
+          }}
+        >
           Novo Item
         </Button>
       </div>
-
-      <Modal show={show} onHide={handleClose} size="lg">
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <CustomerModal show={show} setShow={setShow} />
     </div>
   );
 };

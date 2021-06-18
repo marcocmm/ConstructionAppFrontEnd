@@ -8,6 +8,7 @@ import NovaObra from "./components/pages/NovaObra";
 import NotFound from "./components/pages/NotFound";
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
+import ModalAlertState from "./context/modalAlert/ModalAlertState";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -16,18 +17,20 @@ function App() {
   return (
     <AuthState>
       <AlertState>
-        <Router>
-          <Fragment>
-            <Switch>
-              <PrivateRoute exact path="/" component={Home} />
-              <PrivateRoute exact path="/novaobra" component={NovaObra} />
-              <PrivateRoute exact path="/obra/:id" component={Obra} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/register" component={Register} />
-              <Route component={NotFound} />
-            </Switch>
-          </Fragment>
-        </Router>
+        <ModalAlertState>
+          <Router>
+            <Fragment>
+              <Switch>
+                <PrivateRoute exact path="/" component={Home} />
+                <PrivateRoute exact path="/novaobra" component={NovaObra} />
+                <PrivateRoute exact path="/obra/:id" component={Obra} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <Route component={NotFound} />
+              </Switch>
+            </Fragment>
+          </Router>
+        </ModalAlertState>
       </AlertState>
     </AuthState>
   );

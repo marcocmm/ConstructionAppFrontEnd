@@ -13,6 +13,10 @@ const ItemObra = ({ type, getData }) => {
     getData(setData);
   }, []);
 
+  useEffect(() => {
+    getData(setData);
+  }, [show]);
+
   return (
     <div
       style={{
@@ -60,6 +64,7 @@ const ItemObra = ({ type, getData }) => {
               onClick={() => {
                 setShow(true);
                 setModalType("editar");
+                cliente._id = cliente._id.$oid;
                 setSelectedItem(cliente);
               }}
               style={{

@@ -10,7 +10,17 @@ const CustomerModal = ({ show, setShow, type, editFields }) => {
   const { setAlert } = modalAlertContext;
 
   const handleClose = () => setShow(false);
-  const onDelete = () => setShow(false);
+  async function onDelete() {
+    try {
+      let res = await axios.delete("/customer?customer_id=" + editFields._id);
+      if (res.status === 204) {
+        setShow(false);
+      }
+    } catch (e) {
+      setAlert("Erro ao deletar registro!", "danger");
+      console.log(e);
+    }
+  }
   async function handleSubmit(event) {
     event.preventDefault();
     const config = {
@@ -18,12 +28,18 @@ const CustomerModal = ({ show, setShow, type, editFields }) => {
         "Content-Type": "application/json",
       },
     };
-
     try {
-      const res = await axios.post("/customer/customer", fields, config);
+      let res;
+      if (type === "novo")
+        res = await axios.post("/customer/customer", fields, config);
+      else res = await axios.put("/customer", fields, config);
+
       if (res.status === 201) {
         clearFields();
         setAlert("Registro inserido com sucesso!", "success");
+      }
+      if (res.status === 200) {
+        setAlert("Registro alterado com sucesso!", "success");
       }
     } catch (e) {
       setAlert("Erro ao inserir registro!", "danger");

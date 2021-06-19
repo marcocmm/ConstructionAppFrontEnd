@@ -88,12 +88,12 @@ const Obra = ({ match }) => {
             }}
           >
             <ItemObra getData={getClientes} type={"colaborador"} />
-            <ItemObra getData={getClientes} type={"consumivel"} />
+            {/* <ItemObra getData={getClientes} type={"consumivel"} />
             <ItemObra getData={getClientes} type={"equipamento"} />
             <ItemObra getData={getClientes} type={"cliente"} />
             <ItemObra getData={getClientes} type={"material"} />
             <ItemObra getData={getClientes} type={"servico"} />
-            <ItemObra getData={getClientes} type={"presenca"} />
+            <ItemObra getData={getClientes} type={"presenca"} /> */}
             <ItemObra getData={getFornecedores} type={"fornecedor"} />
           </div>
         </div>

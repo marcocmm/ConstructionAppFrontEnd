@@ -5,6 +5,7 @@ import ProviderModal from "../modal/ProviderModal";
 import ConsumableModal from "../modal/ConsumableModal";
 import EquipmentModal from "../modal/EquipmentModal";
 import MaterialModal from "../modal/MaterialModal";
+import ServiceModal from "../modal/ServiceModal";
 import { typeToTitle } from "../../utils/types";
 
 const ItemObra = ({ obraID, type, getData }) => {
@@ -57,6 +58,16 @@ const ItemObra = ({ obraID, type, getData }) => {
       case "material":
         return (
           <MaterialModal
+            show={show}
+            modalType={modalType}
+            setShow={setShow}
+            obraID={obraID}
+            itemID={itemID}
+          />
+        );
+      case "servico":
+        return (
+          <ServiceModal
             show={show}
             modalType={modalType}
             setShow={setShow}

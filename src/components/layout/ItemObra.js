@@ -3,6 +3,8 @@ import { Button } from "react-bootstrap";
 import CustomerModal from "../modal/CustomerModal";
 import ProviderModal from "../modal/ProviderModal";
 import ConsumableModal from "../modal/ConsumableModal";
+import EquipmentModal from "../modal/EquipmentModal";
+import MaterialModal from "../modal/MaterialModal";
 import { typeToTitle } from "../../utils/types";
 
 const ItemObra = ({ obraID, type, getData }) => {
@@ -44,7 +46,17 @@ const ItemObra = ({ obraID, type, getData }) => {
         );
       case "equipamento":
         return (
-          <ProviderModal
+          <EquipmentModal
+            show={show}
+            modalType={modalType}
+            setShow={setShow}
+            obraID={obraID}
+            itemID={itemID}
+          />
+        );
+      case "material":
+        return (
+          <MaterialModal
             show={show}
             modalType={modalType}
             setShow={setShow}

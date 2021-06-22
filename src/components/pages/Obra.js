@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../layout/Navbar";
 import ItemObra from "../layout/ItemObra";
-import { getClientes, getFornecedores } from "../../utils/api";
+import {
+  getPresencas,
+  getServicos,
+  getMateriais,
+  getEquipamentos,
+  getConsumiveis,
+  getClientes,
+  getFornecedores,
+} from "../../utils/api";
 import axios from "axios";
 import graph1 from "../../img/graph1.png";
 import graph2 from "../../img/graph2.png";
@@ -75,12 +83,31 @@ const Obra = ({ match }) => {
               getData={getClientes}
               type={"cliente"}
             />
-            {/* <ItemObra getData={getClientes} type={"consumivel"} />
-            <ItemObra getData={getClientes} type={"equipamento"} />
-            <ItemObra getData={getClientes} type={"colaborador"} />
-            <ItemObra getData={getClientes} type={"material"} />
-            <ItemObra getData={getClientes} type={"servico"} />
-            <ItemObra getData={getClientes} type={"presenca"} /> */}
+            <ItemObra
+              obraID={obra._id.$oid}
+              getData={getConsumiveis}
+              type={"consumivel"}
+            />
+            <ItemObra
+              obraID={obra._id.$oid}
+              getData={getEquipamentos}
+              type={"equipamento"}
+            />
+            <ItemObra
+              obraID={obra._id.$oid}
+              getData={getMateriais}
+              type={"material"}
+            />
+            <ItemObra
+              obraID={obra._id.$oid}
+              getData={getServicos}
+              type={"servico"}
+            />
+            <ItemObra
+              obraID={obra._id.$oid}
+              getData={getPresencas}
+              type={"presenca"}
+            />
             <ItemObra getData={getFornecedores} type={"fornecedor"} />
           </div>
         </div>

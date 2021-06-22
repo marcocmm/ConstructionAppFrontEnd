@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import CustomerModal from "../modal/CustomerModal";
 import ProviderModal from "../modal/ProviderModal";
+import ConsumableModal from "../modal/ConsumableModal";
 import { typeToTitle } from "../../utils/types";
 
 const ItemObra = ({ obraID, type, getData }) => {
@@ -23,6 +24,27 @@ const ItemObra = ({ obraID, type, getData }) => {
       case "cliente":
         return (
           <CustomerModal
+            show={show}
+            modalType={modalType}
+            setShow={setShow}
+            obraID={obraID}
+            itemID={itemID}
+          />
+        );
+
+      case "consumivel":
+        return (
+          <ConsumableModal
+            show={show}
+            modalType={modalType}
+            setShow={setShow}
+            obraID={obraID}
+            itemID={itemID}
+          />
+        );
+      case "equipamento":
+        return (
+          <ProviderModal
             show={show}
             modalType={modalType}
             setShow={setShow}

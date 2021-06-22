@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../layout/Navbar";
 import ItemObra from "../layout/ItemObra";
+import { getClientes, getFornecedores } from "../../utils/api";
 import axios from "axios";
 import graph1 from "../../img/graph1.png";
 import graph2 from "../../img/graph2.png";
@@ -13,30 +14,12 @@ const Obra = ({ match }) => {
   useEffect(() => {
     getObra(match.params.id);
   }, []);
-  //por em outro arquivo
-  async function getClientes(setData) {
-    try {
-      const res = await axios.get("/customer/all");
-      if (res.status === 200) setData(res.data);
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
-  async function getFornecedores(setData) {
-    try {
-      const res = await axios.get("/provider/all");
-      if (res.status === 200) setData(res.data);
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
-  }
   async function getObra(id) {
     try {
-      const res = await axios.get("/construction?construction_id=" + id);
+      const res = await axios.get("/construction?obra_id=" + id);
       if (res.status === 200) setObra(res.data.result[0]);
+      console.log(res);
     } catch (err) {
       console.log(err);
     }
@@ -87,10 +70,14 @@ const Obra = ({ match }) => {
               overflowX: "scroll",
             }}
           >
-            <ItemObra getData={getClientes} type={"colaborador"} />
+            <ItemObra
+              obraID={obra._id.$oid}
+              getData={getClientes}
+              type={"cliente"}
+            />
             {/* <ItemObra getData={getClientes} type={"consumivel"} />
             <ItemObra getData={getClientes} type={"equipamento"} />
-            <ItemObra getData={getClientes} type={"cliente"} />
+            <ItemObra getData={getClientes} type={"colaborador"} />
             <ItemObra getData={getClientes} type={"material"} />
             <ItemObra getData={getClientes} type={"servico"} />
             <ItemObra getData={getClientes} type={"presenca"} /> */}

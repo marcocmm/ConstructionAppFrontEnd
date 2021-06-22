@@ -13,7 +13,6 @@ const Home = () => {
     try {
       const res = await axios.get("/construction/all");
       if (res.status === 200) setAllObras(res.data);
-      console.log(res);
     } catch (err) {
       console.log(err);
     }

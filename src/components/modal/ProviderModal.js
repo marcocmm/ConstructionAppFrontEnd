@@ -5,32 +5,33 @@ import ModalAlerts from "../layout/ModalAlerts";
 import ModalAlertContext from "../../context/modalAlert/modalAlertContext";
 import axios from "axios";
 
-const CustomerModal = ({ show, setShow, modalType, obraID, itemID }) => {
+const ProviderModal = ({ show, setShow, modalType, itemID }) => {
   const modalAlertContext = useContext(ModalAlertContext);
   const { setAlert } = modalAlertContext;
   const [fields, handleFieldChange] = useFormFields({
     nome: "",
     telefone: "",
-    nipcnif: "",
-    obra_id: obraID,
+    endereco: "",
+    nipc: "",
+    contratoURL: "",
   });
 
   useEffect(() => {
     if (show && modalType === "editar") {
-      getCustomer();
+      getProvider();
     } else clearFields();
   }, [show]);
 
-  async function getCustomer() {
-    let cliente;
+  async function getProvider() {
+    let fornecedor;
     try {
-      const res = await axios.get("/customer?customer_id=" + itemID);
+      const res = await axios.get("/provider?provider_id=" + itemID);
       if (res.status === 200) {
-        cliente = res.data.result[0];
-        cliente._id = cliente._id.$oid;
+        fornecedor = res.data.result[0];
+        fornecedor._id = fornecedor._id.$oid;
         handleFieldChange({
           target: "reset",
-          value: cliente,
+          value: fornecedor,
         });
       }
     } catch (err) {
@@ -45,7 +46,7 @@ const CustomerModal = ({ show, setShow, modalType, obraID, itemID }) => {
 
   async function onDelete(setAlert) {
     try {
-      let res = await axios.delete("/customer?customer_id=" + fields._id);
+      let res = await axios.delete("/provider?provider_id=" + fields._id);
       if (res.status === 204) {
         setShow(false);
       }
@@ -65,8 +66,8 @@ const CustomerModal = ({ show, setShow, modalType, obraID, itemID }) => {
     try {
       let res;
       if (modalType === "novo")
-        res = await axios.post("/customer/customer", fields, config);
-      else res = await axios.put("/customer", fields, config);
+        res = await axios.post("/provider/provider", fields, config);
+      else res = await axios.put("/provider", fields, config);
 
       if (res.status === 201) {
         clearFields();
@@ -87,8 +88,9 @@ const CustomerModal = ({ show, setShow, modalType, obraID, itemID }) => {
       value: {
         nome: "",
         telefone: "",
-        nipcnif: "",
-        obra_id: obraID,
+        endereco: "",
+        nipc: "",
+        contratoURL: "",
       },
     });
   }
@@ -98,7 +100,7 @@ const CustomerModal = ({ show, setShow, modalType, obraID, itemID }) => {
       <Modal show={show} onHide={onClose} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>
-            {modalType === "novo" ? "Novo Cliente" : "Editar Cliente"}
+            {modalType === "novo" ? "Novo " : "Editar "}Fornecedor
           </Modal.Title>
         </Modal.Header>
         <Form onSubmit={(event) => onSubmit(setAlert, clearFields, event)}>
@@ -110,7 +112,7 @@ const CustomerModal = ({ show, setShow, modalType, obraID, itemID }) => {
                 style={{ width: "350px", margin: "20px" }}
               >
                 <Form.Group size="lg" controlId="nome">
-                  <Form.Label>Nome do cliente</Form.Label>
+                  <Form.Label>Nome do fornecedor</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Nome"
@@ -120,12 +122,12 @@ const CustomerModal = ({ show, setShow, modalType, obraID, itemID }) => {
                   />
                 </Form.Group>
 
-                <Form.Group size="lg" controlId="nipcnif">
-                  <Form.Label>NIF/NIPC</Form.Label>
+                <Form.Group size="lg" controlId="nipc">
+                  <Form.Label>NIPC</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="NIF/NIPC"
-                    value={fields.nipcnif}
+                    placeholder="NIPC"
+                    value={fields.nipc}
                     onChange={handleFieldChange}
                     required
                   />
@@ -137,6 +139,26 @@ const CustomerModal = ({ show, setShow, modalType, obraID, itemID }) => {
                     type="text"
                     placeholder="Telefone"
                     value={fields.telefone}
+                    onChange={handleFieldChange}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group size="lg" controlId="endereco">
+                  <Form.Label>Endereço</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Endereço"
+                    value={fields.endereco}
+                    onChange={handleFieldChange}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group size="lg" controlId="contratoURL">
+                  <Form.Label>Contrato URL</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Contrato URL"
+                    value={fields.contratoURL}
                     onChange={handleFieldChange}
                     required
                   />
@@ -170,4 +192,4 @@ const CustomerModal = ({ show, setShow, modalType, obraID, itemID }) => {
   );
 };
 
-export default CustomerModal;
+export default ProviderModal;

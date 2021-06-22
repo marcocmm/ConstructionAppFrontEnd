@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import CustomerModal from "../modal/CustomerModal";
+import ProviderModal from "../modal/ProviderModal";
 import { typeToTitle } from "../../utils/types";
 
-const ItemObra = ({ type, getData }) => {
+const ItemObra = ({ obraID, type, getData }) => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
+  const [itemID, setItemID] = useState();
   const [modalType, setModalType] = useState("novo");
-  const [selectedItem, setSelectedItem] = useState({});
 
   useEffect(() => {
     getData(setData);
@@ -16,6 +17,33 @@ const ItemObra = ({ type, getData }) => {
   useEffect(() => {
     getData(setData);
   }, [show]);
+
+  function getModal(type) {
+    switch (type) {
+      case "cliente":
+        return (
+          <CustomerModal
+            show={show}
+            modalType={modalType}
+            setShow={setShow}
+            obraID={obraID}
+            itemID={itemID}
+          />
+        );
+      case "fornecedor":
+        return (
+          <ProviderModal
+            show={show}
+            modalType={modalType}
+            setShow={setShow}
+            obraID={obraID}
+            itemID={itemID}
+          />
+        );
+      default:
+        break;
+    }
+  }
 
   return (
     <div
@@ -30,12 +58,8 @@ const ItemObra = ({ type, getData }) => {
         boxShadow: "1px 1px 2px 1px",
       }}
     >
-      <CustomerModal
-        show={show}
-        setShow={setShow}
-        type={modalType}
-        editFields={selectedItem}
-      />
+      {getModal(type)}
+
       <div
         style={{
           flex: 1,
@@ -64,8 +88,7 @@ const ItemObra = ({ type, getData }) => {
               onClick={() => {
                 setShow(true);
                 setModalType("editar");
-                cliente._id = cliente._id.$oid;
-                setSelectedItem(cliente);
+                setItemID(cliente._id.$oid);
               }}
               style={{
                 height: "10%",
@@ -109,6 +132,7 @@ const ItemObra = ({ type, getData }) => {
           variant="primary"
           type="submit"
           onClick={() => {
+            // clearFields();
             setModalType("novo");
             setShow(true);
           }}

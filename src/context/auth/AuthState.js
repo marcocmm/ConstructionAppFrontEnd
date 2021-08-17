@@ -4,8 +4,6 @@ import AuthContext from "./authContext";
 import authReducer from "./authReducer";
 import setAuthToken from "../../utils/setAuthToken";
 import {
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
   USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
@@ -17,8 +15,8 @@ import {
 const AuthState = (props) => {
   const initialState = {
     token: localStorage.getItem("token"),
-    isAuthenticated: null,
-    loading: true,
+    isAuthenticated: false,
+    loading: null,
     user: null,
     error: null,
   };
@@ -80,6 +78,10 @@ const AuthState = (props) => {
       const res = await axios.post("/login/", formData, config);
       dispatch({
         type: LOGIN_SUCCESS,
+        payload: res.data,
+      });
+      dispatch({
+        type: USER_LOADED,
         payload: res.data,
       });
       setAuthToken(localStorage.token);

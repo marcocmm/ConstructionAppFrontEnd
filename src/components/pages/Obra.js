@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import Navbar from "../layout/Navbar";
 import ItemObra from "../layout/ItemObra";
@@ -103,11 +104,11 @@ const Obra = ({ match }) => {
               getData={getServicos}
               type={"servico"}
             />
-            <ItemObra
+            {/* <ItemObra
               obraID={obra._id.$oid}
               getData={getPresencas}
               type={"presenca"}
-            />
+            /> */}
             <ItemObra getData={getFornecedores} type={"fornecedor"} />
           </div>
         </div>
